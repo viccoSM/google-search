@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useQuery} from "../utils";
+import SearchIcon from '../assets/search.svg'
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
   const [search, setSearch] = useState('')
 
   const query = useQuery()
+  const location = useLocation()
 
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -75,12 +77,17 @@ const Header = () => {
                   value={search}
                   onChange={handleChange}
                 />
-                  <Link  to={`/search?q=${search}`}>
+                  <Link  to={`${location.pathname}?q=${search}`}>
                     <button className='absolute top-0 right-0 p-2.5 '>
-                      Search
+                      <img src={SearchIcon} alt="" className='h-5'/>
                     </button>
                   </Link>
                 </div>
+              </li>
+              <li className="text-gray-600 hover:text-blue-600">
+                <Link to={`/search?q=${query.get('q')}`}>
+                  All
+                </Link>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
                 <Link to={`/search/news?q=${query.get('q')}`}>

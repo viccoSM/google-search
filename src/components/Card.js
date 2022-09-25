@@ -6,9 +6,8 @@ const Card = ({data}) => (
       <h2 className='text-2xl text-blue-800'>
         {data.title}
       </h2>
-      <p>
-        {data.description}
-      </p>
+      <div dangerouslySetInnerHTML={{ __html: data.description || data.summary }}>
+      </div>
     </a>
     <hr className='mt-2'/>
   </div>
