@@ -2,13 +2,15 @@ import {useQuery} from "../../utils";
 import Card from "../../components/Card";
 import {useGetSearchQuery} from "../../redux/api";
 import {Fragment} from "react";
+import Loader from "../../components/Loader";
 
 const All = () => {
   const query = useQuery()
 
-  const {data} = useGetSearchQuery({type: 'search', q: query.get('q')})
+  const {data, isLoading} = useGetSearchQuery({type: 'search', q: query.get('q')})
 
   return (
+    <Loader isLoading={isLoading}>
     <div className="containers">
       <h1 className='text-2xl mb-5 mt-3'>All - {query.get('q')}</h1>
       <div className="space-y-4">
@@ -40,6 +42,7 @@ const All = () => {
         </div>
       )}
     </div>
+    </Loader>
   );
 }
 
